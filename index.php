@@ -7,6 +7,5 @@ include 'AnalogArchive.php';
  * and open the template in the editor.
  */
 
-AnalogArchive::aStaticMethod();
+AnalogArchive::CatalogMedia();
 
-echo(phpinfo());
