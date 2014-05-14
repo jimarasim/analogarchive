@@ -47,12 +47,17 @@ class AnalogArchive {
        }
        
        //print out songs
+       echo("<table><th colspan=2>Songs - Sort By:</th><tr><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td></tr></table>");
+       echo("<table id='songsTable'>");
+       echo("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
        foreach ($songs as $key => $value) {
-           echo("<a href='".$key."' target='_blank'>".$key."</a><br />");
-           echo("ARTIST:".$value["artist"]."<br />");
-           echo("ALBUM:".$value["album"]."<br />");
-           echo("TITLE:".$value["title"]."<br />");
-           echo("TRACK:".$value["track"]."<br />");
+           echo("<tr>");
+           echo("<td><a href='".$key."' target='_blank'>".$key."</a></td>");
+           echo("<td>".$value["artist"]."</td>");
+           echo("<td>".$value["album"]."</td>");
+           echo("<td>".$value["title"]."</td>");
+           echo("<td>".$value["track"]."</td>");
+           echo("</tr>");
            
        }
        
