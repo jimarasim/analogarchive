@@ -40,10 +40,13 @@ include 'AnalogArchive.php';
             function SetupEvents()
             {
                 //create events to empty table and sort it 
+                
+                //SORT BY FILE 
                 $('#fileSort').click(function(){
                     
                     //clear the table
-                    $('#songsTable').empty();
+                    //$('#songsTable').empty(); //all rows
+                    $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
                     //sort the friends by name
                     var sorted = songsarray.sort(function(a, b){
@@ -53,7 +56,6 @@ include 'AnalogArchive.php';
                     });
 
                     //update the table
-                    $("#songsTable").append("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
                     for (var i=0;i<sorted.length;i++)
                     { 
                         $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
@@ -61,20 +63,20 @@ include 'AnalogArchive.php';
                     
                 });
                 
+                //SORT BY ARTIST (then album, then track, then title, then file)
                 $('#artistSort').click(function(){
                     
-                    //clear the table
-                    $('#songsTable').empty();
+                    //$('#songsTable').empty();
+                    $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
                     //sort the friends by name
                     var sorted = songsarray.sort(function(a, b){
-                        var a1= a.artist, b1= b.artist;
+                        var a1= a.artist+a.album+a.track+a.title+a.file, b1= b.artist+b.album+b.track+b.title+b.file;
                         if(a1=== b1) return 0;
                         return a1> b1? 1: -1;
                     });
 
                     //update the table
-                    $("#songsTable").append("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
                     for (var i=0;i<sorted.length;i++)
                     { 
                         $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
@@ -82,20 +84,20 @@ include 'AnalogArchive.php';
                     
                 });
                 
+                //SORT BY ALBUM (then track, then title, then artist, then file)
                 $('#albumSort').click(function(){
 
-                    //clear the table
-                    $('#songsTable').empty();
+                    //$('#songsTable').empty();
+                    $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
                     //sort the friends by name
                     var sorted = songsarray.sort(function(a, b){
-                        var a1= a.album, b1= b.album;
+                        var a1= a.album+a.track+a.title+a.artist+a.file, b1= b.album+b.track+b.title+b.artist+b.file;
                         if(a1=== b1) return 0;
                         return a1> b1? 1: -1;
                     });
 
                     //update the table
-                    $("#songsTable").append("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
                     for (var i=0;i<sorted.length;i++)
                     { 
                         $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
@@ -103,21 +105,20 @@ include 'AnalogArchive.php';
 
                 });
 
-
+                //SORT BY TITLE (then artist, then album, then track, then file)
                 $('#titleSort').click(function(){
 
-                    //clear the table
-                    $('#songsTable').empty();
+                    //$('#songsTable').empty();
+                    $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
                     //sort the friends by name
                     var sorted = songsarray.sort(function(a, b){
-                        var a1= a.title, b1= b.title;
+                        var a1= a.title+a.artist+a.album+a.track+a.file, b1= b.title+b.artist+b.album+b.track+b.file;
                         if(a1=== b1) return 0;
                         return a1> b1? 1: -1;
                     });
 
                     //update the table
-                    $("#songsTable").append("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
                     for (var i=0;i<sorted.length;i++)
                     { 
                         $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));

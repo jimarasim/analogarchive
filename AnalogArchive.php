@@ -47,9 +47,9 @@ class AnalogArchive {
        }
        
        //print out songs
-       echo("<table><tr><td>Songs - Sort By:</td><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td></tr></table>");
+       //echo("<table><tr><td>Songs - Sort By:</td><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td></tr></table>");
        echo("<table id='songsTable'>");
-       echo("<tr><td>FILE</td><td>ARTIST</td><td>ALBUM</td><td>TITLE</td><td>TRACK</td></tr>");
+       echo("<tr><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td></tr>");
        foreach ($songs as $value) {
            echo("<tr>");
            echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
