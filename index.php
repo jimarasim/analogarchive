@@ -56,7 +56,7 @@ include 'AnalogArchive.php';
                 //AUDIO PLAYER SONG ENDED
                 $('#analogplayer').bind("ended", function(){
                     var currentFile = $(this).children(":first").attr('src');
-                    PlayTrack(currentFile);
+                    PlayNextTrack(currentFile);
                 });
                 
                 //PLAYLIST CLEAR
@@ -178,7 +178,7 @@ include 'AnalogArchive.php';
                     //don't add if already added
                     if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
                     {   
-                        $('#analogplaylist').append("<li>"+checkbox.id+"</li>");
+                        $('#analogplaylist').append("<li onclick='PlayTrack(this)'>"+checkbox.id+"</li>");
                     }
                 }
                 else
@@ -188,7 +188,7 @@ include 'AnalogArchive.php';
             }
             
             //USED TO PLAY NEXT TRACK IN THE PLAYLIST
-            function PlayTrack(currentFile)
+            function PlayNextTrack(currentFile)
             {
                 
                 //get the next track, if there isn't one, use the first one
@@ -200,6 +200,12 @@ include 'AnalogArchive.php';
                 {
                     alert($('#playlistdiv li').first().text());
                 }
+            }
+            
+            //USED TO PLAY THE TRACK CLICKED
+            function PlayTrack(trackobj)
+            {
+                $('#playing').text(trackobj.innerHTML);
             }
 </script>
     </body>

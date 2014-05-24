@@ -20,3 +20,8 @@ and open the template in the editor.
     border: 2px solid;
     border-radius: 5px;
 }
+
+#analogplaylist > li:hover
+{
+    color:greenyellow;
+}
