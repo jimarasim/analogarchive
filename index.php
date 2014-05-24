@@ -178,7 +178,7 @@ include 'AnalogArchive.php';
                     //don't add if already added
                     if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
                     {   
-                        $('#analogplaylist').append("<li onclick='PlayTrack(this)'>"+checkbox.id+"</li>");
+                        $('#analogplaylist').append("<li onclick='PlayTrack(this.innerHTML)'>"+checkbox.id+"</li>");
                     }
                 }
                 else
@@ -194,26 +194,25 @@ include 'AnalogArchive.php';
                 //get the next track, if there isn't one, use the first one
                 if($('#playlistdiv li:contains("'+currentFile+'")').next().text().length!==0)
                 {
-                    alert($('#playlistdiv li:contains("'+currentFile+'")').next().text());
+                    PlayTrack($('#playlistdiv li:contains("'+currentFile+'")').next().text());
                 }
                 else
                 {
-                    alert($('#playlistdiv li').first().text());
+                    PlayTrack($('#playlistdiv li').first().text());
                 }
             }
             
             //USED TO PLAY THE TRACK CLICKED
-            function PlayTrack(trackobj)
+            function PlayTrack(trackstring)
             {
-                //get track name
-                var trackName=trackobj.innerHTML;
+                
                 
                 //update player
-                $('#analogplayer > source').attr('src',trackName);
+                $('#analogplayer > source').attr('src',trackstring);
                 document.getElementById("analogplayer").load();
                 
                 //update "Playing" value
-                $('#playing').text(trackobj.innerHTML);
+                $('#playing').text(trackstring);
             }
 </script>
     </body>
