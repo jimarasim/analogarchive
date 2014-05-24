@@ -10,7 +10,7 @@ and open the template in the editor.
 
 #playlistdiv
 {
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: scroll;
     width: 90%;
     height: 30%;
@@ -28,10 +28,10 @@ and open the template in the editor.
 
 #songlistdiv
 {
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: scroll;
     width: 90%;
-    height: 30%;
+    height: 50%;
     margin: 0px;
     border: 0px;
     padding: 0px;
