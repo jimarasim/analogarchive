@@ -14,6 +14,19 @@ include 'AnalogArchive.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head>
     <body>
+        
+        <div id="playlistdiv">
+            <span>Playlist:</span>
+            <input type="button" id="clear" value="Clear"/><br />
+            <ul id="analogplaylist">
+                <li>last gasp</li>
+            </ul>
+        </div>
+        <br />
+        <audio id="analogplayer" controls="" preload="none">
+            <source src="images/01 Act of the Apostle201109150300595010271.mp3" type="audio/mpeg">
+        </audio>
+        </br>
         <?php
             echo(AnalogArchive::GetHostUrl()."<br /><hr>");
             
@@ -39,7 +52,18 @@ include 'AnalogArchive.php';
             //setup events, like for links that sort the table
             function SetupEvents()
             {
-                //create events to empty table and sort it 
+                //AUDIO PLAYER SONG ENDED
+                $('#analogplayer').bind("ended", function(){
+                    var currentFile = $(this).children(":first").attr('src');
+                    PlayTrack(currentFile);
+                });
+                
+                //PLAYLIST CLEAR
+                $('#clear').click(function(){
+                    $('#analogplaylist').empty();
+                });
+        
+                //SORT EVENTS
                 
                 //SORT BY FILE 
                 $('#fileSort').click(function(){
@@ -87,6 +111,7 @@ include 'AnalogArchive.php';
                 //SORT BY ALBUM (then track, then title, then artist, then file)
                 $('#albumSort').click(function(){
 
+                    
                     //$('#songsTable').empty();
                     $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
@@ -108,6 +133,7 @@ include 'AnalogArchive.php';
                 //SORT BY TITLE (then artist, then album, then track, then file)
                 $('#titleSort').click(function(){
 
+                    
                     //$('#songsTable').empty();
                     $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
@@ -126,11 +152,12 @@ include 'AnalogArchive.php';
                 });
             }
 
+            //USED BY SORTING EVENTS TO GET A FORMATTED TABLE ROW FOR A SONG
             function GetSongRow(file,artist,album,title,track)
             {
                 ///build table row in a message string
                 var row = "<tr>";
-                row += "<td><a href='"+file+"' target='_blank'>"+file+"</a></td>";
+                row += "<td><input type='checkbox' id='"+file+"' onclick='AddRemovePlaylistItem(this)'/><a href='"+file+"' target='_blank'>"+file+"</a></td>";
                 row += "<td>"+artist+"</td>";
                 row += "<td>"+album+"</td>";
                 row += "<td>"+title+"</td>";
@@ -138,6 +165,40 @@ include 'AnalogArchive.php';
                 row += "</tr>";
                 
                 return row;
+            }
+            
+            //USED TO ADD/REMOVE PLAYLIST ITEMS WHEN CHECKED
+            function AddRemovePlaylistItem(checkbox)
+            {
+                //if the checkbox was checked, add it to the play list; otherwise, remove it from the playlist
+                if(checkbox.checked)
+                {
+                    alert($('#analogplaylist > li:contains("'+checkbox.id+'")').length);
+                    //don't add if already added
+                    if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
+                    {   
+                        $('#analogplaylist').append("<li>"+checkbox.id+"</li>");
+                    }
+                }
+                else
+                {
+                    $('#analogplaylist > li:contains("'+checkbox.id+'")').remove();
+                }
+            }
+            
+            //USED TO PLAY NEXT TRACK IN THE PLAYLIST
+            function PlayTrack(currentFile)
+            {
+                
+                //get the next track, if there isn't one, use the first one
+                if($('#playlistdiv li:contains("'+currentFile+'")').next().text().length!==0)
+                {
+                    alert($('#playlistdiv li:contains("'+currentFile+'")').next().text());
+                }
+                else
+                {
+                    alert($('#playlistdiv li').first().text());
+                }
             }
 </script>
     </body>
