@@ -205,6 +205,14 @@ include 'AnalogArchive.php';
             //USED TO PLAY THE TRACK CLICKED
             function PlayTrack(trackobj)
             {
+                //get track name
+                var trackName=trackobj.innerHTML;
+                
+                //update player
+                $('#analogplayer > source').attr('src',trackName);
+                document.getElementById("analogplayer").load();
+                
+                //update "Playing" value
                 $('#playing').text(trackobj.innerHTML);
             }
 </script>
