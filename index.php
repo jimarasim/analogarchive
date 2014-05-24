@@ -210,6 +210,7 @@ include 'AnalogArchive.php';
                 //update player
                 $('#analogplayer > source').attr('src',trackstring);
                 document.getElementById("analogplayer").load();
+                document.getElementById("analogplayer").play();
                 
                 //update "Playing" value
                 $('#playing').text(trackstring);
