@@ -28,6 +28,7 @@ include 'AnalogArchive.php';
         </div>
         <br />
         Check File(s) to Add/Remove from the Playlist
+        <div id="songlistdiv">
         <?php
             
             
@@ -43,6 +44,7 @@ include 'AnalogArchive.php';
             echo("<hr>".AnalogArchive::GetHostUrl()."<br /><hr>");
        
         ?>
+        </div>
         <script>
 
             //setup events after the page is loaded

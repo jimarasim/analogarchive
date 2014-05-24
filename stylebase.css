@@ -12,8 +12,8 @@ and open the template in the editor.
 {
     overflow-x: hidden;
     overflow-y: scroll;
-    width: 500px;
-    height: 250px;
+    width: 90%;
+    height: 30%;
     margin: 0px;
     border: 0px;
     padding: 0px;
@@ -24,4 +24,17 @@ and open the template in the editor.
 #analogplaylist > li:hover
 {
     color:greenyellow;
+}
+
+#songlistdiv
+{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 90%;
+    height: 30%;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    border: 2px solid;
+    border-radius: 5px;
 }
