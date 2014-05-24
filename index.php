@@ -14,7 +14,12 @@ include 'AnalogArchive.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head>
     <body>
-        
+        Playing:<span id="playing"></span><br />
+        <audio id="analogplayer" controls="" preload="none">
+            <source src="" type="audio/mpeg">
+            Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
+        </audio>
+        </br>
         <div id="playlistdiv">
             <span>Playlist:</span>
             <input type="button" id="clear" value="Clear"/><br />
@@ -22,14 +27,9 @@ include 'AnalogArchive.php';
             </ul>
         </div>
         <br />
-        Playing:"<span id="playing"></span>"<br />
-        <audio id="analogplayer" controls="" preload="none">
-            <source src="" type="audio/mpeg">
-            Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
-        </audio>
-        </br>
+        Check File(s) to Add/Remove from the Playlist
         <?php
-            echo(AnalogArchive::GetHostUrl()."<br /><hr>");
+            
             
             try
             {
@@ -39,6 +39,9 @@ include 'AnalogArchive.php';
             {
                 echo("exception:".$ex->getMessage()."<br />trace:".$ex->getTraceAsString());
             }
+            
+            echo("<hr>".AnalogArchive::GetHostUrl()."<br /><hr>");
+       
         ?>
         <script>
 
@@ -179,7 +182,16 @@ include 'AnalogArchive.php';
                     if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
                     {   
                         $('#analogplaylist').append("<li onclick='PlayTrack(this.innerHTML)'>"+checkbox.id+"</li>");
+                        
+                        
+                        //start playing if this is the first item added
+                        if($('#analogplaylist > li').length===1)
+                        {
+                            PlayTrack(checkbox.id);
+                        }
                     }
+                    
+                    
                 }
                 else
                 {
