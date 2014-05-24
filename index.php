@@ -19,12 +19,13 @@ include 'AnalogArchive.php';
             <span>Playlist:</span>
             <input type="button" id="clear" value="Clear"/><br />
             <ul id="analogplaylist">
-                <li>last gasp</li>
             </ul>
         </div>
         <br />
+        Playing:"<span id="playing"></span>"<br />
         <audio id="analogplayer" controls="" preload="none">
-            <source src="images/01 Act of the Apostle201109150300595010271.mp3" type="audio/mpeg">
+            <source src="" type="audio/mpeg">
+            Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
         </audio>
         </br>
         <?php
@@ -173,7 +174,7 @@ include 'AnalogArchive.php';
                 //if the checkbox was checked, add it to the play list; otherwise, remove it from the playlist
                 if(checkbox.checked)
                 {
-                    alert($('#analogplaylist > li:contains("'+checkbox.id+'")').length);
+                   
                     //don't add if already added
                     if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
                     {   
