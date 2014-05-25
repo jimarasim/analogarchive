@@ -49,14 +49,14 @@ class AnalogArchive {
        //print out songs
        //echo("<table><tr><td>Songs - Sort By:</td><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td></tr></table>");
        echo("<table id='songsTable'>");
-       echo("<tr><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td></tr>");
+       echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");
        foreach ($songs as $value) {
            echo("<tr>");
-           echo("<td>".$value["artist"]."</td>");
+           echo("<td><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' />".$value["artist"]."</td>");
            echo("<td>".$value["album"]."</td>");
            echo("<td>".$value["title"]."</td>");
            echo("<td>".$value["track"]."</td>");
-           echo("<td><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' /><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
+           echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
            
            echo("</tr>");
            

@@ -163,11 +163,11 @@ include 'AnalogArchive.php';
             {
                 ///build table row in a message string
                 var row = "<tr>";
-                row += "<td>"+artist+"</td>";
+                row += "<td><input type='checkbox' id='"+file+"' onclick='AddRemovePlaylistItem(this)'/>"+artist+"</td>";
                 row += "<td>"+album+"</td>";
                 row += "<td>"+title+"</td>";
                 row += "<td>"+track+"</td>";
-                row += "<td><input type='checkbox' id='"+file+"' onclick='AddRemovePlaylistItem(this)'/><a href='"+file+"' target='_blank'>"+file+"</a></td>";
+                row += "<td><a href='"+file+"' target='_blank'>"+file+"</a></td>";
                 
                 row += "</tr>";
                 
