@@ -121,9 +121,9 @@ class AnalogArchive {
             }
             
             //get track
-            if(isset($ThisFileInfo['comments_html']['track']))
+            if(isset($ThisFileInfo['comments_html']['track_number']))
             {
-                $track=$ThisFileInfo['comments_html']['track'][0];
+                $track=$ThisFileInfo['comments_html']['track_number'][0];
             }
             else
             {
