@@ -23,6 +23,21 @@ class AnalogArchive {
         // Initialize getID3 engine
         $getID3 = new getID3;
         
+        //see if the mediaFolder was specified
+        $mediaFolderGetParm=filter_input(INPUT_GET,('mediaFolder'));
+        if(isset($mediaFolderGetParm)&&!empty($mediaFolderGetParm))
+        {
+            //verify it exists
+            if(file_exists($mediaFolderGetParm))
+            {
+                self::$mediaFolder = $mediaFolderGetParm;
+            }
+            else
+            {
+                echo("specified media folder does not exist:".$mediaFolderGetParm." scanning default:".self::$mediaFolder);
+            }
+        }
+        
         
         //$mediaFolder = 'media';
         //$mediaFolder='/Users/jameskarasim/Documents/STATIC/Music/_OTHER - VINYL'; //requires chmod o+rx down whole path
