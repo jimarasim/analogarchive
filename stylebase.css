@@ -38,3 +38,12 @@ and open the template in the editor.
     border: 2px solid;
     border-radius: 5px;
 }
+
+table
+{
+    border-collapse:collapse;
+}
+table, td, th
+{
+    border:1px solid black;
+}
