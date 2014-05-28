@@ -66,7 +66,11 @@ include 'AnalogArchive.php';
                 
                 //PLAYLIST CLEAR
                 $('#clear').click(function(){
+                    //clear the playlist
                     $('#analogplaylist').empty();
+                    
+                    //uncheck all the songs
+                    $("input[type='checkbox']").attr('checked',false);
                 });
         
                 //SORT EVENTS

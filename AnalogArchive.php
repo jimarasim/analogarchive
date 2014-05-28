@@ -138,7 +138,9 @@ class AnalogArchive {
             //get track
             if(isset($ThisFileInfo['comments_html']['track_number']))
             {
-                $track=$ThisFileInfo['comments_html']['track_number'][0];
+                //GET THE TRACK NUMBER, AND PAD IT WITH 0
+                $track=str_pad($ThisFileInfo['comments_html']['track_number'][0],2,"0",STR_PAD_LEFT);
+                
             }
             else
             {
