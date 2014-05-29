@@ -67,10 +67,10 @@ class AnalogArchive {
        echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");
        foreach ($songs as $value) {
            echo("<tr>");
-           echo("<td><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' />".$value["artist"]."</td>");
-           echo("<td>".$value["album"]."</td>");
-           echo("<td>".$value["title"]."</td>");
-           echo("<td>".$value["track"]."</td>");
+           echo("<td name='artist'><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' />".$value["artist"]."</td>");
+           echo("<td name='album'>".$value["album"]."</td>");
+           echo("<td name='title'>".$value["title"]."</td>");
+           echo("<td name='track'>".$value["track"]."</td>");
            echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
            
            echo("</tr>");
@@ -139,7 +139,7 @@ class AnalogArchive {
             if(isset($ThisFileInfo['comments_html']['track_number']))
             {
                 //GET THE TRACK NUMBER, AND PAD IT WITH 0
-                $track=str_pad($ThisFileInfo['comments_html']['track_number'][0],2,"0",STR_PAD_LEFT);
+                $track=str_pad($ThisFileInfo['comments_html']['track_number'][0],5,"0",STR_PAD_LEFT);
                 
             }
             else

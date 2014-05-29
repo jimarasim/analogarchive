@@ -8,22 +8,39 @@ and open the template in the editor.
     Author     : jameskarasim
 */
 
+body
+{
+    background-color: lightgray;
+}
+
+.current
+{
+    color:darkblue;
+}
+
+#currentsong
+{
+    font-size:smaller;
+}
+
 #playlistdiv
 {
     overflow-x: scroll;
     overflow-y: scroll;
     width: 90%;
-    height: 30%;
+    height: 20%;
     margin: 0px;
     border: 0px;
     padding: 0px;
     border: 2px solid;
     border-radius: 5px;
+    background-color: wheat;
 }
+
 
 #analogplaylist > li:hover
 {
-    color:greenyellow;
+    color:darkorange;
 }
 
 #songlistdiv
@@ -31,12 +48,13 @@ and open the template in the editor.
     overflow-x: scroll;
     overflow-y: scroll;
     width: 90%;
-    height: 50%;
+    height: 40%;
     margin: 0px;
     border: 0px;
     padding: 0px;
     border: 2px solid;
     border-radius: 5px;
+    background-color: wheat;
 }
 
 table

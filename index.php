@@ -14,20 +14,33 @@ include 'AnalogArchive.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head>
     <body>
-        Playing:<span id="playing"></span><br />
+        <h1>Analog Archive</h1>
+        <div id="currentsong">
+            <b class="current">Artist:</b><span id="artist"></span>
+       
+        <b class="current">Album:</b><span id="album"></span>
+        
+        <b class="current">Title:</b><span id="title"></span>
+        
+        <b class="current">Track:</b><span id="track"></span>
+        
+        <b class="current">File:</b><a id="file" href="" target="_blank"></a>
+        </div>
         <audio id="analogplayer" controls="" preload="none">
             <source src="" type="audio/mpeg">
             Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
         </audio>
-        </br>
+        
+        <br />
+        Playlist:<br />
         <div id="playlistdiv">
-            <span>Playlist:</span>
-            <input type="button" id="clear" value="Clear"/><br />
+
+            <input type="button" id="clear" value="Clear Playlist"/><br />
             <ul id="analogplaylist">
             </ul>
         </div>
         <br />
-        Check File(s) to Add/Remove from the Playlist
+        Check songs to add to Playlist:<br />
         <div id="songlistdiv">
         <?php
             
@@ -41,10 +54,9 @@ include 'AnalogArchive.php';
                 echo("exception:".$ex->getMessage()."<br />trace:".$ex->getTraceAsString());
             }
             
-            echo("<hr>".AnalogArchive::GetHostUrl()."<br /><hr>");
-       
         ?>
         </div>
+        
         <script>
 
             //setup events after the page is loaded
@@ -167,10 +179,10 @@ include 'AnalogArchive.php';
             {
                 ///build table row in a message string
                 var row = "<tr>";
-                row += "<td><input type='checkbox' id='"+file+"' onclick='AddRemovePlaylistItem(this)'/>"+artist+"</td>";
-                row += "<td>"+album+"</td>";
-                row += "<td>"+title+"</td>";
-                row += "<td>"+track+"</td>";
+                row += "<td name='artist'><input type='checkbox' id='"+file+"' onclick='AddRemovePlaylistItem(this)'/>"+artist+"</td>";
+                row += "<td name='album'>"+album+"</td>";
+                row += "<td name='title'>"+title+"</td>";
+                row += "<td name='track'>"+track+"</td>";
                 row += "<td><a href='"+file+"' target='_blank'>"+file+"</a></td>";
                 
                 row += "</tr>";
@@ -232,9 +244,17 @@ include 'AnalogArchive.php';
                 document.getElementById("analogplayer").play();
                 
                 //update "Playing" value
-                $('#playing').text(trackstring);
+                var $fileTd = $("td > a:contains('"+trackstring+"')").parent();
+                $("#artist").text($fileTd.prevAll("td[name='artist']").text());
+                $("#album").text($fileTd.prevAll("td[name='album']").text());
+                $("#title").text($fileTd.prevAll("td[name='title']").text());
+                $("#track").text($fileTd.prevAll("td[name='track']").text());
+                $("#file").text(trackstring);
+                $("#file").attr("href",trackstring);
+                
             }
 </script>
+
     </body>
 </html>
 
