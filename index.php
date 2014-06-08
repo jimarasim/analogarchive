@@ -29,12 +29,12 @@ include 'AnalogArchive.php';
         <b class="current">File:</b><a id="file" href="" target="_blank"></a>
         </div>
         <br />
-        <img id="albumart" src="favicon.ico" alt="" />
-        <br />
         <audio id="analogplayer" controls="" preload="none">
             <source src="" type="audio/mpeg">
             Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
         </audio>
+        <br />
+        <img id="albumart" src="favicon.ico" alt="" />
         
         <br />
         Playlist:<br />
