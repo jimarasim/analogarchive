@@ -62,7 +62,6 @@ class AnalogArchive {
        }
        
        //print out songs
-       //echo("<table><tr><td>Songs - Sort By:</td><td><a href='#' id='fileSort'>File</a></td><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td></tr></table>");
        echo("<table id='songsTable'>");
        echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");
        foreach ($songs as $value) {
@@ -91,15 +90,10 @@ class AnalogArchive {
      */
     private static function GetId3DisplayId3Data($getID3,$filePath,&$songs)
     {
-        
         // Analyze file and store returned data in $ThisFileInfo
         $ThisFileInfo = $getID3->analyze($filePath);
 
-        /*
-         Optional: copies data from all subarrays of [tags] into [comments] so
-         metadata is all available in one location for all tag formats
-         metainformation is always available under [tags] even if this is not called
-        */
+        //copy tags to the comments array
         getid3_lib::CopyTagsToComments($ThisFileInfo);
         
         //get all tag comments we care about
@@ -147,11 +141,6 @@ class AnalogArchive {
                 $track=self::$emptyVal;
             }
             
-            //use this to display all tags gotten
-//            foreach($ThisFileInfo['comments_html'] as $property => $value)
-//            {
-//                echo("PROPERTY:".$property." VALUE:".$value[0]."<BR />");
-//            }
         }
         else 
         {
@@ -159,13 +148,10 @@ class AnalogArchive {
             $album=self::$emptyVal;
             $title=self::$emptyVal;
             $track=self::$emptyVal;
-            //echo("INVALID ID3 INFO<BR />");
         }
         
         //add song to array of all songs found
         $songs[]=array("file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track);
-        
-        
     }
     
     /**
@@ -185,6 +171,47 @@ class AnalogArchive {
    }
 
 
+   /**
+    * This function gets the artwork for an mp3
+    * @param type $filePath
+    */
+   public static function GetMp3Artwork($mp3FilePath)
+   {
+        // Initialize getID3 engine
+        $getID3 = new getID3;
+
+        // Analyze file and store returned data in $ThisFileInfo
+        $ThisFileInfo = $getID3->analyze($mp3FilePath);
+        
+        //initialize image data with an empty string, that will be returned in case there is no image
+        $imageData = "";
+        $mimeType = "";
+
+        //check if artwork is there
+        if(isset($ThisFileInfo['id3v2']['APIC']))
+        {
+            $mimeType=$ThisFileInfo['id3v2']['APIC'][0]['mime'];
+            $imageData = $ThisFileInfo['id3v2']['APIC'][0]['data'];
+
+        }
+        //check here if not found there
+        elseif(isset($ThisFileInfo['comments']['picture']))
+        {
+            $mimeType = $ThisFileInfo['comments']['picture'][0]['image_mime'];
+            $imageData = $ThisFileInfo['comments']['picture'][0]['data'];
+
+        }
+        
+        //return a src string for an img tag to display the image
+        if(!empty($mimeType)&&!empty($imageData))
+        {
+            return "data:".$mimeType.";base64,".base64_encode($imageData);
+        }
+        else 
+        {
+            return "";
+        }
+   }
     
     
 }
