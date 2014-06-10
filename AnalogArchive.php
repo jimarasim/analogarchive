@@ -61,6 +61,22 @@ class AnalogArchive {
             
        }
        
+       //sort songs by artist a.artist+a.album+a.track+a.title+a.file
+       //http://www.php.net//manual/en/function.array-multisort.php
+       // Obtain a list of columns
+       //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
+        foreach ($songs as $key => $row) {
+            $file[$key]  = $row['file'];
+            $artist[$key] = $row['artist'];
+            $album[$key]  = $row['album'];
+            $title[$key] = $row['title'];
+            $track[$key] = $row['track'];
+        }
+
+        // Sort the data 
+        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
+       
+       
        //print out songs
        echo("<table id='songsTable'>");
        echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");

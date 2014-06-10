@@ -221,6 +221,7 @@ function PlayTrack(trackstring)
               {
                   //set returned album art
                   $('#albumart').attr('src',data);
+                  $('body').css('background-image','url('+data+')');
               }
             }
         );
