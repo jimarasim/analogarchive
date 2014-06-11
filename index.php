@@ -15,27 +15,30 @@ include 'AnalogArchive.php';
         <script type="text/javascript" src="analogarchivecodebase.js"></script>  
     </head>
     <body>
-        <h1>Analog Archive</h1>
-        
-        <div id="currentsong">
-        <b class="current">Artist:</b><span id="artist"></span>
-       
-        <b class="current">Album:</b><span id="album"></span>
-        
-        <b class="current">Title:</b><span id="title"></span>
-        
-        <b class="current">Track:</b><span id="track"></span>
-        
-        <b class="current">File:</b><a id="file" href="" target="_blank"></a>
-        </div>
-        <br />
-        <audio id="analogplayer" controls="" preload="none">
-            <source src="" type="audio/mpeg">
-            Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
-        </audio>
-        <br />
-        <img id="albumart" src="favicon.ico" alt="" />
-        
+        <table>
+            <tr><td>
+                <img id="albumart" src="favicon.ico" alt="" />
+            </td><td>
+                <h1>Analog Archive</h1>
+
+                <div id="currentsong">
+                <b class="current">Artist:</b><span id="artist"></span>
+
+                <b class="current">Album:</b><span id="album"></span>
+
+                <b class="current">Title:</b><span id="title"></span>
+
+                <b class="current">Track:</b><span id="track"></span>
+
+                <b class="current">File:</b><a id="file" href="" target="_blank"></a>
+                </div>
+                <br />
+                <audio id="analogplayer" controls="" preload="none">
+                    <source src="" type="audio/mpeg">
+                    Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
+                </audio>
+                </td></tr>
+        </table>
         <br />
         Playlist:<br />
         <div id="playlistdiv">
