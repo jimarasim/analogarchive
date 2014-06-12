@@ -15,11 +15,13 @@ include 'AnalogArchive.php';
         <script type="text/javascript" src="analogarchivecodebase.js"></script>  
     </head>
     <body>
+    <center>
         <table>
-            <tr><td>
-                <img id="albumart" src="favicon.ico" alt="" />
+            <tr><td id="albumarttd">
+                    <img id="albumart" src="favicon.ico" alt="" />
             </td><td>
                 <h1>Analog Archive</h1>
+                
 
                 <div id="currentsong">
                 <b class="current">Artist:</b><span id="artist"></span>
@@ -39,16 +41,12 @@ include 'AnalogArchive.php';
                 </audio>
                 </td></tr>
         </table>
-        <br />
-        Playlist:<br />
         <div id="playlistdiv">
 
             <input type="button" id="clear" value="Clear Playlist"/><br />
             <ul id="analogplaylist">
             </ul>
         </div>
-        <br />
-        Check songs to add to Playlist:<br />
         <div id="songlistdiv">
         <?php
             
@@ -65,6 +63,9 @@ include 'AnalogArchive.php';
         ?>
         </div>
         
+        <b>This site will never have advertising nor anything for sale.</b>
+        </center>
     </body>
+
 </html>
 

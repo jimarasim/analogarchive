@@ -179,7 +179,7 @@ function PlayNextTrack(currentFile)
     {
         PlayTrack($('#playlistdiv li[id="'+currentFile+'"]').next().attr('id'));
     }
-    else
+    elseif($('#playlistdiv li[id="'+currentFile+'"]').first().text().length!==0)
     {
         PlayTrack($('#playlistdiv li').first().attr('id'));
     }

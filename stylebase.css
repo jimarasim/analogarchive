@@ -35,6 +35,7 @@ body
     border: 2px solid;
     border-radius: 5px;
     background-color: wheat;
+    text-align: left;
 }
 
 
@@ -55,19 +56,32 @@ body
     border: 2px solid;
     border-radius: 5px;
     background-color: wheat;
+    text-align: left;
 }
 
 table
 {
     border-collapse:collapse;
+    width:90%;
 }
 table, td, th
 {
     border:1px solid black;
 }
 
+#albumarttd
+{
+    width:155px;
+    text-align:center;
+}
+
 img
 {
-    width:200px;
-    height:200px;
+    width:150px;
+    height:150px;
+}
+
+li
+{
+    text-align:left;
 }

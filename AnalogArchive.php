@@ -17,6 +17,7 @@ class AnalogArchive {
 
     private static $mediaFolder = 'images';
     private static $emptyVal = '';
+    private static $startTime;
     
     public static function CatalogMedia()
     {
@@ -60,6 +61,7 @@ class AnalogArchive {
             }
             
        }
+       
        
        //sort songs by artist a.artist+a.album+a.track+a.title+a.file
        //http://www.php.net//manual/en/function.array-multisort.php
@@ -109,6 +111,7 @@ class AnalogArchive {
         // Analyze file and store returned data in $ThisFileInfo
         $ThisFileInfo = $getID3->analyze($filePath);
 
+        
         //copy tags to the comments array
         getid3_lib::CopyTagsToComments($ThisFileInfo);
         
@@ -124,6 +127,7 @@ class AnalogArchive {
             {
                 $artist=self::$emptyVal;
             }
+            
             
             //get album
             if(isset($ThisFileInfo['comments_html']['album']))
@@ -168,6 +172,7 @@ class AnalogArchive {
         
         //add song to array of all songs found
         $songs[]=array("file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track);
+        
     }
     
     /**
