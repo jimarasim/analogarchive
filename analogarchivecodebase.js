@@ -144,9 +144,14 @@ function AddRemovePlaylistItem(checkbox)
     {
 
         //don't add if already added
-        if($('#analogplaylist > li:contains("'+checkbox.id+'")').length===0)
+        if($('#analogplaylist > li[id="'+checkbox.id+'"]').length===0)
         {   
-            $('#analogplaylist').append("<li onclick='PlayTrack(this.innerHTML)'>"+checkbox.id+"</li>");
+            var $fileTd = $("td > a:contains('"+checkbox.id+"')").parent();
+            var artist = $fileTd.prevAll("td[name='artist']").text();
+            var album = $fileTd.prevAll("td[name='album']").text();
+            var title = $fileTd.prevAll("td[name='title']").text();
+            var track = $fileTd.prevAll("td[name='track']").text();
+            $('#analogplaylist').append("<li id='"+checkbox.id+"' onclick='PlayTrack(this.id)'><a href='#'>"+artist+" "+album+" "+title+" "+track+" "+checkbox.id+"</a></li>");
 
 
             //start playing if this is the first item added
@@ -160,7 +165,8 @@ function AddRemovePlaylistItem(checkbox)
     }
     else
     {
-        $('#analogplaylist > li:contains("'+checkbox.id+'")').remove();
+        $('#analogplaylist > li[id="'+checkbox.id+'"]').remove();
+        
     }
 }
 
@@ -169,13 +175,13 @@ function PlayNextTrack(currentFile)
 {
 
     //get the next track, if there isn't one, use the first one
-    if($('#playlistdiv li:contains("'+currentFile+'")').next().text().length!==0)
+    if($('#playlistdiv li[id="'+currentFile+'"]').next().text().length!==0)
     {
-        PlayTrack($('#playlistdiv li:contains("'+currentFile+'")').next().text());
+        PlayTrack($('#playlistdiv li[id="'+currentFile+'"]').next().attr('id'));
     }
     else
     {
-        PlayTrack($('#playlistdiv li').first().text());
+        PlayTrack($('#playlistdiv li').first().attr('id'));
     }
 
 
