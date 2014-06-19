@@ -69,7 +69,9 @@ class AnalogArchive {
        //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
         foreach ($songs as $key => $row) {
             $file[$key]  = $row['file'];
-            $artist[$key] = $row['artist'];
+            //$artist[$key] = $row['artist'];
+            //use regular expression to take the The from the beginning of the string
+            $artist[$key] = preg_replace('/^The /', '', $row['artist']);
             $album[$key]  = $row['album'];
             $title[$key] = $row['title'];
             $track[$key] = $row['track'];
