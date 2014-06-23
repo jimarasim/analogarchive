@@ -118,6 +118,32 @@ function SetupEvents()
             $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
         }
     });
+    
+    //select artist dropdown
+    $("#artistFilter").change(function(){
+        
+        //get the chosen artist
+        var filteredArtist = $("#artistFilter option:selected").attr('value');
+        
+        //clear the table
+        $('#songsTable').find("tr:gt(0)").remove(); //all but first row
+
+        //sort the SONGS by artist
+        var sorted = songsarray.sort(function(a, b){
+            var a1= a.artist+a.album+a.track+a.title+a.file, b1= b.artist+b.album+b.track+b.title+b.file;
+            if(a1=== b1) return 0;
+            return a1> b1? 1: -1;
+        });
+
+        //update the table with only the chosen artist
+        for (var i=0;i<sorted.length;i++)
+        { 
+            if(sorted[i].artist===filteredArtist || filteredArtist==="ALL ARTISTS")
+            {
+                $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+            }
+        }
+    });
 }
 
 //USED BY SORTING EVENTS TO GET A FORMATTED TABLE ROW FOR A SONG

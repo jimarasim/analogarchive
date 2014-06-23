@@ -8,6 +8,9 @@ require_once('getid3/getid3.php');
 //turn on all error reporting
 error_reporting(E_ALL); 
 
+//set time zone
+date_default_timezone_set('America/Los_Angeles');
+
 /**
  * Description of codebase
  *
@@ -17,7 +20,6 @@ class AnalogArchive {
 
     private static $mediaFolder = 'images';
     private static $emptyVal = '';
-    private static $startTime;
     
     public static function CatalogMedia()
     {
@@ -39,12 +41,10 @@ class AnalogArchive {
             }
         }
         
-        
         //$mediaFolder = 'media';
         //$mediaFolder='/Users/jameskarasim/Documents/STATIC/Music/_OTHER - VINYL'; //requires chmod o+rx down whole path
         //get a list of files in media folder
         $files = scandir(self::$mediaFolder);
-        
         
         $songs = array();
         
@@ -56,12 +56,15 @@ class AnalogArchive {
             {
                 //found an mp3
                 $filePath = self::$mediaFolder.'/'.$value;
-                //self::ZendDisplayId3Data($filePath);
+                
+//                echo(date('Y/m/d H:i:s').$filePath.'<br />');
+                
                 self::GetId3DisplayId3Data($getID3,$filePath,$songs);
+                
+//                echo(date('Y/m/d H:i:s').$filePath.'<br />');
             }
             
        }
-       
        
        //sort songs by artist a.artist+a.album+a.track+a.title+a.file
        //http://www.php.net//manual/en/function.array-multisort.php
@@ -69,9 +72,9 @@ class AnalogArchive {
        //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
         foreach ($songs as $key => $row) {
             $file[$key]  = $row['file'];
-            //$artist[$key] = $row['artist'];
-            //use regular expression to take the The from the beginning of the string
-            $artist[$key] = preg_replace('/^The /', '', $row['artist']);
+            $artist[$key] = $row['artist'];
+            //use regular expression to take the The from the beginning of the string THIS REMOVES "THE" FROM DROP DOWN FILTER AS WELL :(
+            //$artist[$key] = preg_replace('/^The /', '', $row['artist']);
             $album[$key]  = $row['album'];
             $title[$key] = $row['title'];
             $track[$key] = $row['track'];
@@ -80,7 +83,16 @@ class AnalogArchive {
         // Sort the data 
         array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
        
-       
+        //artist drop down for filtering
+        $artistUnique=array_unique($artist);
+        echo("<select id='artistFilter'>");
+        echo("<option value='ALL ARTISTS'>ALL ARTISTS</option>");
+        foreach ($artistUnique as $anArtist)
+        {
+            echo("<option value='".$anArtist."'>".$anArtist."</option>");
+        }
+        echo("</select>");
+        
        //print out songs
        echo("<table id='songsTable'>");
        echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");
@@ -97,7 +109,7 @@ class AnalogArchive {
        }
        echo("</table>");
        
-       //serialize the data on the client
+    //serialize the data on the client
        echo("<script>var songsarray = ".json_encode($songs).";</script>");
     }
     
