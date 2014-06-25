@@ -72,11 +72,11 @@ class AnalogArchive {
        //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
         foreach ($songs as $key => $row) {
             $file[$key]  = $row['file'];
-            $artist[$key] = $row['artist'];
+            $artistUnique[$key] = $row['artist']; //this is for the dropdown, keep The in
             //use regular expression to take the The from the beginning of the string THIS REMOVES "THE" FROM DROP DOWN FILTER AS WELL :(
-            //$artist[$key] = preg_replace('/^The /', '', $row['artist']);
+            $artist[$key] = preg_replace('/^The /', '', $row['artist']);
             $album[$key]  = $row['album'];
-            $title[$key] = $row['title'];
+            $title[$key] = $row['title'];   
             $track[$key] = $row['track'];
         }
 
@@ -84,9 +84,10 @@ class AnalogArchive {
         array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
        
         //artist drop down for filtering
-        $artistUnique=array_unique($artist);
+        $artistUnique=array_unique($artistUnique);  //get unique values
+        asort($artistUnique); //sort by value
         echo("<select id='artistFilter'>");
-        echo("<option value='ALL ARTISTS'>ALL ARTISTS</option>");
+        echo("<option value='-ALL ARTISTS-'>-ALL ARTISTS-</option>");
         foreach ($artistUnique as $anArtist)
         {
             echo("<option value='".$anArtist."'>".$anArtist."</option>");

@@ -138,7 +138,7 @@ function SetupEvents()
         //update the table with only the chosen artist
         for (var i=0;i<sorted.length;i++)
         { 
-            if(sorted[i].artist===filteredArtist || filteredArtist==="ALL ARTISTS")
+            if(sorted[i].artist===filteredArtist || filteredArtist==="-ALL ARTISTS-")
             {
                 $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
             }
