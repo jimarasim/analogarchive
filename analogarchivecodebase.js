@@ -199,6 +199,11 @@ function AddRemovePlaylistItem(checkbox)
 //USED TO PLAY NEXT TRACK IN THE PLAYLIST
 function PlayNextTrack(currentFile)
 {
+    //don't do anything if there are no tracks
+    if($('#playlistdiv li').length===0)
+    {
+        return;
+    }
 
     //get the next track, if there isn't one, use the first one
     if($('#playlistdiv li[id="'+currentFile+'"]').next().text().length!==0)
