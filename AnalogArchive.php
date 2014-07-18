@@ -86,13 +86,15 @@ class AnalogArchive {
         //artist drop down for filtering
         $artistUnique=array_unique($artistUnique);  //get unique values
         asort($artistUnique); //sort by value
-        echo("<select id='artistFilter'>");
+        echo("<div class='control'><select id='artistFilter'>");
         echo("<option value='-ALL ARTISTS-'>-ALL ARTISTS-</option>");
         foreach ($artistUnique as $anArtist)
         {
             echo("<option value='".$anArtist."'>".$anArtist."</option>");
         }
-        echo("</select>");
+        echo("</select><br /></div>");
+        
+        echo("<div id='songlistdiv'>");
         
        //print out songs
        echo("<table id='songsTable'>");
@@ -109,6 +111,7 @@ class AnalogArchive {
            
        }
        echo("</table>");
+       echo("</div>");
        
     //serialize the data on the client
        echo("<script>var songsarray = ".json_encode($songs).";</script>");

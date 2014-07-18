@@ -41,13 +41,16 @@ include 'AnalogArchive.php';
                 </audio>
                 </td></tr>
         </table>
+        <div class="control">
+            <input type="button" id="clear" value="Clear Playlist"/>
+        </div>
         <div id="playlistdiv">
 
-            <input type="button" id="clear" value="Clear Playlist"/><br />
+            
             <ul id="analogplaylist">
             </ul>
         </div>
-        <div id="songlistdiv">
+        
         <?php
             
             
@@ -61,7 +64,6 @@ include 'AnalogArchive.php';
             }
             
         ?>
-        </div>
         
         <b>This site will never have advertising nor anything for sale.</b>
         </center>

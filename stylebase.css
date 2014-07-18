@@ -18,6 +18,12 @@ body
     color:darkblue;
 }
 
+div.control
+{
+    text-align:left;
+    width: 90%;
+}
+
 #currentsong
 {
     font-size:smaller;
