@@ -57,16 +57,19 @@ class AnalogArchive {
                 //found an mp3
                 $filePath = self::$mediaFolder.'/'.$value;
                 
-//                echo(date('Y/m/d H:i:s').$filePath.'<br />');
+                //get the date modified
+                $fileModifiedDate = date("YmdHis",filemtime($filePath));
                 
-                self::GetId3DisplayId3Data($getID3,$filePath,$songs);
+//               echo(date('Y/m/d H:i:s').$filePath.'<br />');
+                
+                self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
                 
 //                echo(date('Y/m/d H:i:s').$filePath.'<br />');
             }
             
        }
        
-       //sort songs by artist a.artist+a.album+a.track+a.title+a.file
+       //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
        //http://www.php.net//manual/en/function.array-multisort.php
        // Obtain a list of columns
        //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
@@ -78,10 +81,11 @@ class AnalogArchive {
             $album[$key]  = $row['album'];
             $title[$key] = $row['title'];   
             $track[$key] = $row['track'];
+            $modifiedDate[$key] = $row['modifiedDate'];
         }
 
         // Sort the data 
-        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
+        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $modifiedDate, SORT_ASC, $songs);
        
         //artist drop down for filtering
         $artistUnique=array_unique($artistUnique);  //get unique values
@@ -98,7 +102,10 @@ class AnalogArchive {
         
        //print out songs
        echo("<table id='songsTable'>");
-       echo("<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td><td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td></tr>");
+       $SORT_ROW="<tr><td><a href='#' id='artistSort'>Artist</a></td><td><a href='#' id='albumSort'>Album</a></td>";
+       $SORT_ROW.="<td><a href='#' id='titleSort'>Title</a></td><td>Track</td><td><a href='#' id='fileSort'>File</a></td>";
+       $SORT_ROW.="<td><a href='#' id='modifiedDateSort'>Modified Date</a></td></tr>";
+       echo($SORT_ROW);
        foreach ($songs as $value) {
            echo("<tr>");
            echo("<td name='artist'><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' />".$value["artist"]."</td>");
@@ -106,6 +113,7 @@ class AnalogArchive {
            echo("<td name='title'>".$value["title"]."</td>");
            echo("<td name='track'>".$value["track"]."</td>");
            echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
+           echo("<td name='modifiedDate'>".$value["modifiedDate"]."</td>");
            
            echo("</tr>");
            
@@ -124,7 +132,7 @@ class AnalogArchive {
      * @param type $filePath - path to the file
      * @param type &$songs - songs array to populate
      */
-    private static function GetId3DisplayId3Data($getID3,$filePath,&$songs)
+    private static function GetId3DisplayId3Data($getID3,$filePath,$fileDate,&$songs)
     {
         // Analyze file and store returned data in $ThisFileInfo
         $ThisFileInfo = $getID3->analyze($filePath);
@@ -189,7 +197,7 @@ class AnalogArchive {
         }
         
         //add song to array of all songs found
-        $songs[]=array("file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track);
+        $songs[]=array("file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track,"modifiedDate"=>$fileDate);
         
     }
     

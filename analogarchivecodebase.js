@@ -32,15 +32,34 @@ function SetupEvents()
     });
 
     //SORT EVENTS
+    
+    //SORT BY MODIFIED DATE
+    $('#modifiedDateSort').click(function(){
+        
+        //clear the table
+        $('#songsTable').find("tr:gt(0)").remove(); //all but first row
+        
+        //sort the files by modified date
+        var sorted = songsarray.sort(function(a, b){
+            var a1= a.modifiedDate, b1= b.modifiedDate;
+            if(a1=== b1) return 0;
+            return a1> b1? 1: -1;
+        });
+       
+        //update the table
+        for (var i=0;i<sorted.length;i++)
+        { 
+            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
+        }
+    });
 
     //SORT BY FILE 
     $('#fileSort').click(function(){
 
         //clear the table
-        //$('#songsTable').empty(); //all rows
         $('#songsTable').find("tr:gt(0)").remove(); //all but first row
 
-        //sort the friends by name
+        //sort the files by file name
         var sorted = songsarray.sort(function(a, b){
             var a1= a.file, b1= b.file;
             if(a1=== b1) return 0;
@@ -50,7 +69,7 @@ function SetupEvents()
         //update the table
         for (var i=0;i<sorted.length;i++)
         { 
-            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
         }
 
     });
@@ -71,7 +90,7 @@ function SetupEvents()
         //update the table
         for (var i=0;i<sorted.length;i++)
         { 
-            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
         }
 
     });
@@ -93,7 +112,7 @@ function SetupEvents()
         //update the table
         for (var i=0;i<sorted.length;i++)
         { 
-            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
         }
 
     });
@@ -115,7 +134,7 @@ function SetupEvents()
         //update the table
         for (var i=0;i<sorted.length;i++)
         { 
-            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+            $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
         }
     });
     
@@ -140,14 +159,14 @@ function SetupEvents()
         { 
             if(sorted[i].artist===filteredArtist || filteredArtist==="-ALL ARTISTS-")
             {
-                $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track));
+                $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
             }
         }
     });
 }
 
 //USED BY SORTING EVENTS TO GET A FORMATTED TABLE ROW FOR A SONG
-function GetSongRow(file,artist,album,title,track)
+function GetSongRow(file,artist,album,title,track,modifiedDate)
 {
     ///build table row in a message string
     var row = "<tr>";
@@ -156,6 +175,7 @@ function GetSongRow(file,artist,album,title,track)
     row += "<td name='title'>"+title+"</td>";
     row += "<td name='track'>"+track+"</td>";
     row += "<td><a href='"+file+"' target='_blank'>"+file+"</a></td>";
+    row += "<td name='modifiedDate'>"+modifiedDate+"</td>";
 
     row += "</tr>";
 
@@ -177,7 +197,7 @@ function AddRemovePlaylistItem(checkbox)
             var album = $fileTd.prevAll("td[name='album']").text();
             var title = $fileTd.prevAll("td[name='title']").text();
             var track = $fileTd.prevAll("td[name='track']").text();
-            $('#analogplaylist').append("<li id='"+checkbox.id+"' onclick='PlayTrack(this.id)'><a href='#'>"+artist+" "+album+" "+title+" "+track+" "+checkbox.id+"</a></li>");
+            $('#analogplaylist').append("<li id='"+checkbox.id+"' onclick='PlayTrack(this.id)'>"+artist+" | "+album+" | "+title+" | "+track+" | "+checkbox.id+"</li>");
 
 
             //start playing if this is the first item added

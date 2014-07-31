@@ -75,6 +75,13 @@ table, td, th
     border:1px solid black;
 }
 
+#songsTable, #playlistdiv
+{
+    font-size:75%;
+}
+
+
+
 #albumarttd
 {
     width:155px;

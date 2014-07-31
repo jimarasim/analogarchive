@@ -33,6 +33,7 @@ include 'AnalogArchive.php';
                 <b class="current">Track:</b><span id="track"></span>
 
                 <b class="current">File:</b><a id="file" href="" target="_blank"></a>
+                
                 </div>
                 <br />
                 <audio id="analogplayer" controls="" preload="none">
