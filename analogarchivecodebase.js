@@ -43,7 +43,7 @@ function SetupEvents()
         var sorted = songsarray.sort(function(a, b){
             var a1= a.modifiedDate, b1= b.modifiedDate;
             if(a1=== b1) return 0;
-            return a1> b1? 1: -1;
+            return a1< b1? 1: -1;
         });
        
         //update the table

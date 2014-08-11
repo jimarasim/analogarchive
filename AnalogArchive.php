@@ -46,6 +46,8 @@ class AnalogArchive {
         //get a list of files in media folder
         $files = scandir(self::$mediaFolder);
         
+//        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
+        
         $songs = array();
         
         //iterate through files
@@ -60,14 +62,19 @@ class AnalogArchive {
                 //get the date modified
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));
                 
-//               echo(date('Y/m/d H:i:s').$filePath.'<br />');
-                
+//                $startTime = date('YmdHis');
+               
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
                 
-//                echo(date('Y/m/d H:i:s').$filePath.'<br />');
+//                $elapsedTime = date('YmdHis')-$startTime;
+//                if($elapsedTime>0){
+//                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
+//                }
             }
             
        }
+       
+//       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
        
        //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
        //http://www.php.net//manual/en/function.array-multisort.php
@@ -85,7 +92,7 @@ class AnalogArchive {
         }
 
         // Sort the data 
-        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $modifiedDate, SORT_ASC, $songs);
+        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
        
         //artist drop down for filtering
         $artistUnique=array_unique($artistUnique);  //get unique values
@@ -121,8 +128,10 @@ class AnalogArchive {
        echo("</table>");
        echo("</div>");
        
+       
     //serialize the data on the client
        echo("<script>var songsarray = ".json_encode($songs).";</script>");
+       
     }
     
     /**
