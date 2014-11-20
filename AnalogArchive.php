@@ -62,10 +62,12 @@ class AnalogArchive {
                 //get the date modified
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));
                 
-                $startTime = date('YmdHis');
+                //DEBUG
+//                $startTime = date('YmdHis');
                
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
                 
+                //DEBUG
                 $elapsedTime = date('YmdHis')-$startTime;
                 if($elapsedTime>0){
                     echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
@@ -74,7 +76,7 @@ class AnalogArchive {
             
        }
        
-//       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
+       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
        
        //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
        //http://www.php.net//manual/en/function.array-multisort.php
