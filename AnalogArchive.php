@@ -46,7 +46,8 @@ class AnalogArchive {
         //get a list of files in media folder
         $files = scandir(self::$mediaFolder);
         
-        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
+        //DEBUG
+//        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
         
         $songs = array();
         
@@ -63,20 +64,21 @@ class AnalogArchive {
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));
                 
                 //DEBUG
-//                $startTime = date('YmdHis');
+//                $startTime = date('YmdHisu');
                
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
                 
                 //DEBUG
-                $elapsedTime = date('YmdHis')-$startTime;
-                if($elapsedTime>0){
-                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
-                }
+//                $elapsedTime = date('YmdHisu')-$startTime;
+//                if($elapsedTime>0.5){
+//                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
+//                }
             }
             
        }
        
-       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
+       //DEBUG
+//       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
        
        //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
        //http://www.php.net//manual/en/function.array-multisort.php
