@@ -46,7 +46,7 @@ class AnalogArchive {
         //get a list of files in media folder
         $files = scandir(self::$mediaFolder);
         
-//        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
+        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
         
         $songs = array();
         
@@ -62,14 +62,14 @@ class AnalogArchive {
                 //get the date modified
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));
                 
-//                $startTime = date('YmdHis');
+                $startTime = date('YmdHis');
                
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
                 
-//                $elapsedTime = date('YmdHis')-$startTime;
-//                if($elapsedTime>0){
-//                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
-//                }
+                $elapsedTime = date('YmdHis')-$startTime;
+                if($elapsedTime>0){
+                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
+                }
             }
             
        }
