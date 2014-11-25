@@ -1,7 +1,6 @@
 /media/
 /Zend/
 .DS_Store
-images/*.*
+images/.DS_Store
 nbproject/.DS_Store
 nbproject/private/
-
