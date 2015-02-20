@@ -77,6 +77,8 @@ class AnalogArchive {
             
        }
        
+       //TODO CHECK IF SONGS ARRAY IS EMPTY BEFORE GOING FURTHER
+       
        //DEBUG
 //       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
        
