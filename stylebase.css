@@ -18,15 +18,19 @@ body
     color:darkblue;
 }
 
+#currentsong
+{
+    font-size:smaller;
+}
+
 div.control
 {
     text-align:left;
     width: 90%;
 }
 
-#currentsong
-{
-    font-size:smaller;
+.error{
+    color:red;
 }
 
 #playlistdiv
