@@ -19,7 +19,7 @@ date_default_timezone_set('America/Los_Angeles');
 class AnalogArchive {
 
     private static $allArtistsEnum='-ALL ARTISTS-';
-    private static $bandFilter='';
+    private static $artistFilter='';
     private static $mediaFolder = 'images';
     private static $emptyVal='';
     
@@ -107,10 +107,10 @@ class AnalogArchive {
         array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
        
         //see if an artist was specified as a parameter
-        $bandFilterGetParm=filter_input(INPUT_GET,('bandFilter'));
-        if(isset($bandFilterGetParm)&&!empty($bandFilterGetParm))
+        $artistFilterGetParm=filter_input(INPUT_GET,('artistFilter'));
+        if(isset($artistFilterGetParm)&&!empty($artistFilterGetParm))
         {
-            self::$bandFilter=$bandFilterGetParm;
+            self::$artistFilter=$artistFilterGetParm;
         }
         //artist drop down for filtering
         $artistUnique=array_unique($artistUnique);  //get unique values
@@ -119,8 +119,11 @@ class AnalogArchive {
         echo("<option value='".self::$allArtistsEnum."'>".self::$allArtistsEnum."</option>");
         foreach ($artistUnique as $anArtist)
         {
-            if($anArtist===self::$bandFilter){
+            if($anArtist===self::$artistFilter){
                 echo("<option selected value='".$anArtist."'>".$anArtist."</option>");
+                
+                //save off the artist that's selected, and only show those songs
+                $anArtistSelected=$anArtist;
             }
             else{
                 echo("<option value='".$anArtist."'>".$anArtist."</option>");
@@ -137,6 +140,14 @@ class AnalogArchive {
        $SORT_ROW.="<td><a href='#' id='modifiedDateSort'>Modified Date</a></td></tr>";
        echo($SORT_ROW);
        foreach ($songs as $value) {
+           
+           //don't print out songs form other artists, if one is specified
+           if(     isset($anArtistSelected) &&
+                   !empty($anArtistSelected) &&
+                   $value["artist"]!==$anArtistSelected)
+           {
+                continue;
+           }
            echo("<tr>");
            echo("<td name='artist'><input type='checkbox' id='".$value["file"]."' onclick='AddRemovePlaylistItem(this)' />".$value["artist"]."</td>");
            echo("<td name='album'>".$value["album"]."</td>");
@@ -144,9 +155,7 @@ class AnalogArchive {
            echo("<td name='track'>".$value["track"]."</td>");
            echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
            echo("<td name='modifiedDate'>".$value["modifiedDate"]."</td>");
-           
            echo("</tr>");
-           
        }
        echo("</table>");
        echo("</div>");
