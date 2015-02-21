@@ -5,3 +5,5 @@ images/*.*
 nbproject/.DS_Store
 nbproject/private/
 digital/
+*.mp3
+*.mp4
