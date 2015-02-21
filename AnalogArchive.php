@@ -18,8 +18,10 @@ date_default_timezone_set('America/Los_Angeles');
  */
 class AnalogArchive {
 
+    private static $allArtistsEnum='-ALL ARTISTS-';
+    private static $bandFilter='';
     private static $mediaFolder = 'images';
-    private static $emptyVal = '';
+    private static $emptyVal='';
     
     public static function CatalogMedia()
     {
@@ -77,6 +79,12 @@ class AnalogArchive {
             
        }
        
+       //TODO CHECK IF SONGS ARRAY IS EMPTY BEFORE GOING FURTHER
+       if(sizeof($songs)<=0){
+           echo("<h2 class='error'>THERE ARE NO MP3 FILES IN mediaFolder SPECIFIED:".self::$mediaFolder."</h2>");
+           return;
+       }
+       
        //DEBUG
 //       echo('TIMEMARK'.date('Y/m/d H:i:s').'<br />');
        
@@ -98,14 +106,25 @@ class AnalogArchive {
         // Sort the data 
         array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
        
+        //see if an artist was specified as a parameter
+        $bandFilterGetParm=filter_input(INPUT_GET,('bandFilter'));
+        if(isset($bandFilterGetParm)&&!empty($bandFilterGetParm))
+        {
+            self::$bandFilter=$bandFilterGetParm;
+        }
         //artist drop down for filtering
         $artistUnique=array_unique($artistUnique);  //get unique values
         asort($artistUnique); //sort by value
         echo("<div class='control'><select id='artistFilter'>");
-        echo("<option value='-ALL ARTISTS-'>-ALL ARTISTS-</option>");
+        echo("<option value='".self::$allArtistsEnum."'>".self::$allArtistsEnum."</option>");
         foreach ($artistUnique as $anArtist)
         {
-            echo("<option value='".$anArtist."'>".$anArtist."</option>");
+            if($anArtist===self::$bandFilter){
+                echo("<option selected value='".$anArtist."'>".$anArtist."</option>");
+            }
+            else{
+                echo("<option value='".$anArtist."'>".$anArtist."</option>");
+            }
         }
         echo("</select><br /></div>");
         
