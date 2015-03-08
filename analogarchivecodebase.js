@@ -159,6 +159,7 @@ function SetupEvents()
         for (var i=0;i<sorted.length;i++)
         { 
             console.log(sorted[i].artist);
+            console.log(filteredArtist);
             if(sorted[i].artist===filteredArtist || filteredArtist===allArtistsEnum)
             {
                 $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
