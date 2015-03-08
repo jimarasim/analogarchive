@@ -18,7 +18,7 @@ date_default_timezone_set('America/Los_Angeles');
  */
 class AnalogArchive {
 
-    private static $allArtistsEnum='-ALL ARTISTS-';
+    private static $allArtistsEnum='-ALL ARTISTS-'; //this is on the client side too in analogarchviecodebase.js
     private static $artistFilter='';
     private static $mediaFolder = 'images';
     private static $emptyVal='';

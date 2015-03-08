@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+var allArtistsEnum='-ALL ARTISTS-';
 
 //setup events after the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
@@ -157,7 +158,8 @@ function SetupEvents()
         //update the table with only the chosen artist
         for (var i=0;i<sorted.length;i++)
         { 
-            if(sorted[i].artist===filteredArtist || filteredArtist==="-ALL ARTISTS-")
+            console.log(sorted[i].artist);
+            if(sorted[i].artist===filteredArtist || filteredArtist===allArtistsEnum)
             {
                 $("#songsTable").append(GetSongRow(sorted[i].file,sorted[i].artist,sorted[i].album,sorted[i].title,sorted[i].track,sorted[i].modifiedDate));
             }
