@@ -70,6 +70,10 @@ include 'AnalogArchive.php';
         ?>
         
         <b>This site will never have advertising nor anything for sale.</b>
+        <br />
+        
+        <br />
+        <b>Ripped at 192kbps.  For higher quality, buy the lp at your local record store.  If you can't find it there, try <a href=http://www.discogs.com/>discogs.com/<a></b>
         </center>
     </body>
 
