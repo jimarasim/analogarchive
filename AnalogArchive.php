@@ -119,6 +119,7 @@ class AnalogArchive {
         echo("<option value='".self::$allArtistsEnum."'>".self::$allArtistsEnum."</option>");
         foreach ($artistUnique as $anArtist)
         {
+            echo("anartist:'".$anArtist."' artistfilter:'".self::$artistFilter."'");
             if($anArtist===self::$artistFilter){
                 echo("<option selected value='".$anArtist."'>".$anArtist."</option>");
                 
