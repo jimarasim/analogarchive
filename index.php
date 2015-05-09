@@ -73,7 +73,9 @@ include 'AnalogArchive.php';
         <br />
         
         <br />
-        <b>Ripped at 192kbps.  For higher quality, buy the lp at your local record store.  If you can't find it there, try <a href=http://www.discogs.com/>discogs.com/<a></b>
+        <p>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</p>
+        <p>Buy these lps at your local record store if you like them. I did.</p>  
+        <p>If you the at your local record store, try <a href=http://www.discogs.com/>discogs.com/<a> Fuck Amazon.</p>
         </center>
     </body>
 
