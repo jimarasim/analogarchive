@@ -43,7 +43,18 @@ include 'AnalogArchive.php';
                     <source src="" type="audio/mpeg">
                     Your browser doesn't support the HTML5 Audio Tag for type="audio/mpeg"<br />
                 </audio>
-                </td></tr>
+                </td>
+                <td>
+                    <ul>
+        <li>This site will never have advertising nor anything for sale.</li>
+        <li>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</li>
+        <li>Buy these lps at your local record store if you like them. I did.</li>  
+        <li>If you cant find them at your local record store, try <a href=http://www.discogs.com/>discogs.com/<a> Fuck Amazon.</li>
+        </ul>
+                </td>
+            
+            
+            </tr>
         </table>
         <div class="control">
             <input type="button" id="clear" value="Clear Playlist"/>
@@ -68,12 +79,7 @@ include 'AnalogArchive.php';
             }
             
         ?>
-        <ul>
-        <li>This site will never have advertising nor anything for sale.</li>
-        <li>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</li>
-        <li>Buy these lps at your local record store if you like them. I did.</li>  
-        <li>If you cant find them at your local record store, try <a href=http://www.discogs.com/>discogs.com/<a> Fuck Amazon.</li>
-        </ul>
+        
         </center>
     </body>
 
