@@ -26,6 +26,11 @@ div.control
     color:red;
 }
 
+.highlighted {
+    color: whitesmoke;
+    background-color: black;
+}
+
 #playlistdiv
 {
     overflow-x: scroll;
