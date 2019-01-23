@@ -20,7 +20,7 @@ class AnalogArchive {
 
     private static $allArtistsEnum='-ALL ARTISTS-'; //this is on the client side too in analogarchviecodebase.js
     private static $artistFilter='';
-    private static $mediaFolder = 'images';
+    private static $mediaFolder = 'live';
     private static $emptyVal='';
     
     public static function CatalogMedia()
