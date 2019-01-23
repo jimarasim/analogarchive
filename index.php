@@ -41,6 +41,25 @@ include 'AnalogArchive.php';
                     <li>This site will never have advertising nor anything for sale.</li>
                     <li>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</li>
                     <li>Buy these lps at your local record store if you like them, or start your own record label. I own everything you see here on wax, or recorded the WAV files myself.</li>
+                    <li>There are 3 flavors of MP3s here: 
+                        <?php
+                            $queryString = filter_input(INPUT_GET, 'mediaFolder');
+                            
+                            if($queryString==='analog') {
+                                echo("<b><a href='/?mediaFolder=analog'>ANALOG</a></b> ");
+                                echo("<a href='/?mediaFolder=live'>LIVE</a> ");
+                                echo("<a href='/?mediaFolder=digital'>DIGITAL</a> ");
+                            } else if ($queryString==='digital') {
+                                echo("<a href='/?mediaFolder=analog'>ANALOG</a> ");
+                                echo("<a href='/?mediaFolder=live'>LIVE</a> ");
+                                echo("<b><a href='/?mediaFolder=digital'>DIGITAL</a></b> ");
+                            } else {
+                                echo("<a href='/?mediaFolder=analog'>ANALOG</a> ");
+                                echo("<b><a href='/?mediaFolder=live'>LIVE</a></b> ");
+                                echo("<a href='/?mediaFolder=digital'>DIGITAL</a> ");
+                            }
+                        ?>
+                    </li>
                 </ul>
             </td>
         </tr>
