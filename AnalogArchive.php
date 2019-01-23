@@ -43,13 +43,8 @@ class AnalogArchive {
             }
         }
         
-        //$mediaFolder = 'media';
-        //$mediaFolder='/Users/jameskarasim/Documents/STATIC/Music/_OTHER - VINYL'; //requires chmod o+rx down whole path
         //get a list of files in media folder
         $files = scandir(self::$mediaFolder);
-        
-        //DEBUG
-//        echo('TIMEMARK GETTING MP3 DATA FOR EACH FILE'.date('Y/m/d H:i:s').'<br />');
         
         $songs = array();
         
