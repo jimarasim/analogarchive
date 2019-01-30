@@ -194,7 +194,7 @@ function AddRemovePlaylistItem(checkbox)
         //don't add if already added
         if($('#analogplaylist > li[id="'+checkbox.id+'"]').length===0)
         {   
-            var $fileTd = $("td > a:contains('"+checkbox.id+"')").parent();
+            var $fileTd = $("td > a[href='"+checkbox.id+"']").parent();
             var artist = $fileTd.prevAll("td[name='artist']").text();
             var album = $fileTd.prevAll("td[name='album']").text();
             var title = $fileTd.prevAll("td[name='title']").text();
@@ -251,7 +251,7 @@ function PlayTrack(trackstring)
     document.getElementById("analogplayer").play();
 
     //update "Playing" value
-    var $fileTd = $("td > a:contains('"+trackstring+"')").parent();
+    var $fileTd = $("td > a[href='"+trackstring+"']").parent();
     var artist = $fileTd.prevAll("td[name='artist']").text();
     var album = $fileTd.prevAll("td[name='album']").text();
     var title = $fileTd.prevAll("td[name='title']").text();
@@ -260,8 +260,9 @@ function PlayTrack(trackstring)
     $("#album").text(album);
     $("#title").text(title);
     $("#track").text(track);
-    $("#file").text(trackstring);
+    //$("#file").text(trackstring);
     $("#file").attr("href",trackstring);
+    $("#file").attr("download",artist+"-"+album+"-"+title);
 
     //get the album artwork
     $.ajax({

@@ -29,7 +29,7 @@ include 'AnalogArchive.php';
                     <b class="current">Album:</b><span id="album"></span>
                     <b class="current">Title:</b><span id="title"></span>
                     <b class="current">Track:</b><span id="track"></span>
-                    <b class="current">File:</b><a id="file" href="" target="_blank"></a>
+                    <b class="current"></b><a id="file" href="" download=""><img src="download_button.png" /></a>
                 </div>
                 <br />
                 <audio id="analogplayer" controls="" preload="none">
