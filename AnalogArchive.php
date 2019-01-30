@@ -149,7 +149,7 @@ class AnalogArchive {
            echo("<td name='album'>".$value["album"]."</td>");
            echo("<td name='title'>".$value["title"]."</td>");
            echo("<td name='track'>".$value["track"]."</td>");
-           echo("<td><a href='".$value["file"]."' target='_blank'>".$value["file"]."</a></td>");
+           echo("<td><a href='".$value["file"]."' download='".$value["artist"]."-".$value["album"]."-".$value["title"]."'><img src='download_button.png'></a></td>");
            echo("<td name='modifiedDate'>".$value["modifiedDate"]."</td>");
            echo("</tr>");
        }
