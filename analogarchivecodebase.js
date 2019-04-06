@@ -290,12 +290,13 @@ function PlayTrack(trackstring)
 var digitalSongs = new Array();
 var analogSongs = new Array();
 var liveSongs = new Array();
+var songsArray = new Array();
 
 function getSongs(mediaFolder) {
     
     removeSongs();
+    songsArray = [];
     
-    var songsArray;
     switch(mediaFolder) {
         case 'digital':
             songsArray = digitalSongs;
@@ -313,6 +314,7 @@ function getSongs(mediaFolder) {
     
     if(songsArray.length > 0) {
         populateSongsDropdown (songsArray);
+        saveSongs(mediaFolder);
     } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -320,6 +322,7 @@ function getSongs(mediaFolder) {
               if(isJson(this.responseText)) {
                   songsArray = JSON.parse(this.responseText);
                   populateSongsDropdown(songsArray);
+                  saveSongs(mediaFolder);
                   
               } else {
                 document.getElementById("songs").innerHTML = this.responseText;
@@ -329,8 +332,25 @@ function getSongs(mediaFolder) {
         xmlhttp.open("GET", "GetSongs.php?mediaFolder="+mediaFolder, true);
         xmlhttp.send();
     }
-    
+
 }
+
+function saveSongs(mediaFolder) {
+    switch(mediaFolder) {
+        case 'digital':
+            digitalSongs = songsArray;
+            break;
+        case 'analog':
+            analogSongs = songsArray;
+            break;
+        case 'live':
+            liveSongs = songsArray;
+            break;
+        default:
+            break;
+    }
+}
+
 
 function removeSongs() {
     var myNode = document.getElementById("songs");
