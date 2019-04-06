@@ -308,7 +308,6 @@ function getSongs(mediaFolder) {
             songsArray = liveSongs;
             break;
         default:
-            songsArray = new Array();
             break;
     }
     
