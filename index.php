@@ -29,7 +29,7 @@ include 'AnalogArchive.php';
                     <b class="current">Album:</b><span id="album"></span>
                     <b class="current">Title:</b><span id="title"></span>
                     <b class="current">Track:</b><span id="track"></span>
-                    <b class="current">File:</b><a id="file" href="" target="_blank"></a>
+                    <b class="current"></b><a id="file" href="" download=""><img src="download_button.png" /></a>
                 </div>
                 <br />
                 <audio id="analogplayer" controls="" preload="none">
@@ -40,7 +40,8 @@ include 'AnalogArchive.php';
                 <ul>
                     <li>This site will never have advertising nor anything for sale.</li>
                     <li>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</li>
-                    <li>Buy these lps at your local record store if you like them, or start your own record label. I own everything you see here on wax, or recorded the WAV files myself.</li>
+                    <li>Buy these lps at your local record store if you like them, or start your own record label. I own everything you see here on wax, or recorded the WAV files myself.</li>                        
+                    </li>
                 </ul>
             </td>
         </tr>
@@ -48,6 +49,23 @@ include 'AnalogArchive.php';
     <div class="control">
         <input type="button" id="clear" value="Clear Playlist"/>
     </div>
+    <?php
+                            $queryString = filter_input(INPUT_GET, 'mediaFolder');
+                            
+                            if($queryString==='analog') {
+                                echo("<b><a class='highlighted' href='/?mediaFolder=analog'>ANALOG</a></b> ");
+                                echo("<a href='/?mediaFolder=live'>LIVE</a> ");
+                                echo("<a href='/?mediaFolder=digital'>DIGITAL</a> ");
+                            } else if ($queryString==='digital') {
+                                echo("<a href='/?mediaFolder=analog'>ANALOG</a> ");
+                                echo("<a href='/?mediaFolder=live'>LIVE</a> ");
+                                echo("<b><a class='highlighted' href='/?mediaFolder=digital'>DIGITAL</a></b> ");
+                            } else {
+                                echo("<a href='/?mediaFolder=analog'>ANALOG</a> ");
+                                echo("<b><a class='highlighted' href='/?mediaFolder=live'>LIVE</a></b> ");
+                                echo("<a href='/?mediaFolder=digital'>DIGITAL</a> ");
+                            }
+                        ?>
     <div id="playlistdiv">
         <ul id="analogplaylist">
         </ul>
