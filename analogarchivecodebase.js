@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//index.php/////////////////////////////////////////////////////////////////////////////
 var allArtistsEnum='-ALL ARTISTS-';
 
 //setup events after the page is loaded
@@ -284,9 +284,83 @@ function PlayTrack(trackstring)
               }
             }
         );
-//                    
-//                $.get("FindArtwork.php?artist="+encodeURIComponent(artist)+"&album="+encodeURIComponent(album),function( data ) {
-//                    $('#albumart').attr('alt',data);
-//                  });
+}
 
+//index.html/////////////////////////////////////////////////////////////////////////////
+var digitalSongs = new Array();
+var analogSongs = new Array();
+var liveSongs = new Array();
+
+function getSongs(mediaFolder) {
+    
+    removeSongs();
+    
+    var songsArray;
+    switch(mediaFolder) {
+        case 'digital':
+            songsArray = digitalSongs;
+            break;
+        case 'analog':
+            songsArray = analogSongs;
+            break;
+        case 'live':
+            songsArray = liveSongs;
+            break;
+        default:
+            songsArray = new Array();
+            break;
+    }
+    
+    if(songsArray.length > 0) {
+        populateSongsDropdown (songsArray);
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+              if(isJson(this.responseText)) {
+                  songsArray = JSON.parse(this.responseText);
+                  populateSongsDropdown(songsArray);
+                  
+              } else {
+                document.getElementById("songs").innerHTML = this.responseText;
+            }
+          }
+        };
+        xmlhttp.open("GET", "GetSongs.php?mediaFolder="+mediaFolder, true);
+        xmlhttp.send();
+    }
+    
+}
+
+function removeSongs() {
+    var myNode = document.getElementById("songs");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+}
+
+function populateSongsDropdown(songs) {
+    for(let i=0;i<songs.length;i++) {
+        let song = document.createElement("option");
+        song.value = songs[i].file;
+        song.innerHTML = songs[i].artist + " " + songs[i].album +  " " + songs[i].title;
+        document.getElementById("songs").appendChild(song);
+    }
+    
+    playSong(songs[0].file);
+}
+
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function playSong(fileName) {
+    document.getElementById("analogplayer").src = fileName;
+    document.getElementById("analogplayer").load();
+    document.getElementById("analogplayer").play();
 }

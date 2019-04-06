@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Analog Archive</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="analogarchivecodebase.js"></script>
+    </head>
+    <body>
+        <audio id="analogplayer" controls="" preload="none">
+        <source src="" type="audio/mpeg">Your browser does not support the HTML5 Audio Tag for type="audio/mpeg"<br />
+        </audio>
+        <br />
+        <input type="radio" name="kind" value="live" onclick="getSongs(this.value)" checked>live
+        <input type="radio" name="kind" value="analog" onclick="getSongs(this.value)">analog
+        <input type="radio" name="kind" value="digital" onclick="getSongs(this.value)">digital
+        <br />
+        <select id="songs" onchange="playSong(this.value)"></select>
+        <script>getSongs('live');</script>      
+    </body>
+</html>
