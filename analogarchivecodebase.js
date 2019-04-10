@@ -389,9 +389,9 @@ function populateSongsDropdown(songs) {
 
         // select default item after sorting (first item)
         $('#songs').get(0).selectedIndex = 0;
+        playSong(document.getElementById('songs').value);
       });
     
-    playSong(songs[0].file);
 }
 
 function isJson(str) {
