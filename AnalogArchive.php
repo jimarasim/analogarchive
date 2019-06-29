@@ -23,7 +23,7 @@ class AnalogArchive {
     private static $mediaFolder = 'live';
     private static $emptyVal='';
     
-    public static function CatalogMedia()
+    public static function GetSongs()
     {
         // Initialize getID3 engine
         $getID3 = new getID3;
@@ -58,21 +58,17 @@ class AnalogArchive {
                 $filePath = self::$mediaFolder.'/'.$value;
                 
                 //get the date modified
-                $fileModifiedDate = date("YmdHis",filemtime($filePath));
-                
-                //DEBUG
-//                $startTime = date('YmdHisu');
-               
+                $fileModifiedDate = date("YmdHis",filemtime($filePath));  
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
-                
-                //DEBUG
-//                $elapsedTime = date('YmdHisu')-$startTime;
-//                if($elapsedTime>0.5){
-//                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
-//                }
             }
-            
        }
+       
+       return $songs;     
+    }
+    
+    public static function CatalogMedia()
+    {
+        $songs = self::GetSongs();
        
        //TODO CHECK IF SONGS ARRAY IS EMPTY BEFORE GOING FURTHER
        if(sizeof($songs)<=0){
