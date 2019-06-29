@@ -23,8 +23,33 @@ class AnalogArchive {
     private static $artistFilter='';
     private static $mediaFolder = 'live';
     private static $emptyVal='';
+
+    /**
+     * Used by seattlerules.com
+     * @param type $mediaFolder
+     */
+    public static function GetSongsJson($mediaFolder='live')
+    {
+        // Initialize getID3 engine
+        $getID3 = new getID3;
+        
+        if(!file_exists(__DIR__.'/'.$mediaFolder)) {
+            echo('CANNOT FIND '.__DIR__.'/'.$mediaFolder);
+            return;
+        }
+        
+        $songs = array();
+        
+        
+        
+        return json_encode($songs);
+    }
     
-    public static function GetSongs()
+    /**
+     * Legacy for analogarchive.com only
+     * @return type
+     */
+    public static function CatalogMedia()
     {
         // Initialize getID3 engine
         $getID3 = new getID3;
@@ -63,38 +88,7 @@ class AnalogArchive {
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
             }
        }
-       
-       return $songs;     
-    }
-    
-    /**
-     * Used by seattlerules.com
-     * @param type $mediaFolder
-     */
-    public static function GetSongsJson($mediaFolder='live')
-    {
-        //set this since the mediaFolder GET parameter won't be set
-        self::$mediaFolder = $mediaFolder;
-        
-        $songs = self::GetSongs();
-        
-        if(sizeof($songs)<=0){
-           echo("<h2 class='error'>THERE ARE NO MP3 FILES IN mediaFolder SPECIFIED:".self::$mediaFolder."</h2>");
-           echo("__DIR__".__DIR__);
-           return;
-        }
-        
-        return json_encode($songs);
-    }
-    
-    /**
-     * Legacy for analogarchive.com only
-     * @return type
-     */
-    public static function CatalogMedia()
-    {
-        $songs = self::GetSongs();
-       
+
        //TODO CHECK IF SONGS ARRAY IS EMPTY BEFORE GOING FURTHER
        if(sizeof($songs)<=0){
            echo("<h2 class='error'>THERE ARE NO MP3 FILES IN mediaFolder SPECIFIED:".self::$mediaFolder."</h2>");
