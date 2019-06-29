@@ -77,6 +77,12 @@ class AnalogArchive {
         
         $songs = self::GetSongs();
         
+        if(sizeof($songs)<=0){
+           echo("<h2 class='error'>THERE ARE NO MP3 FILES IN mediaFolder SPECIFIED:".self::$mediaFolder."</h2>");
+           echo("__DIR__".__DIR__);
+           return;
+        }
+        
         return json_encode($songs);
     }
     
