@@ -50,7 +50,7 @@ class AnalogArchive {
             if ($pos !== false) 
             {
                 //found an mp3
-                $filePath = self::$baseUrl.'/'.$mediaFolder.'/'.$value;
+                $filePath = $mediaFolder.'/'.$value;
                 
                 //get the date modified
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));  
