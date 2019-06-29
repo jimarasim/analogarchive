@@ -38,11 +38,28 @@ class AnalogArchive {
             return;
         }
         
+        //get a list of files in media folder
+        $files = scandir(__DIR__.'/'.$mediaFolder);
+        
         $songs = array();
         
+        //iterate through files
+        foreach ($files as $value) {
+            //find the mp3s
+            $pos = strrpos($value, ".mp3",-1);
+            if ($pos !== false) 
+            {
+                //found an mp3
+                $filePath = self::$baseUrl.'/'.$mediaFolder.'/'.$value;
+                
+                //get the date modified
+                $fileModifiedDate = date("YmdHis",filemtime($filePath));  
+                self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
+            }
+       }
         
         
-        return json_encode($songs);
+       return json_encode($songs);
     }
     
     /**
