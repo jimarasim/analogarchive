@@ -18,7 +18,6 @@ date_default_timezone_set('America/Los_Angeles');
  */
 class AnalogArchive {
 
-    private static $baseUrl='http://analogarchive.com';
     private static $allArtistsEnum='-ALL ARTISTS-'; //this is on the client side too in analogarchviecodebase.js
     private static $artistFilter='';
     private static $mediaFolder = 'live';
@@ -50,7 +49,7 @@ class AnalogArchive {
             if ($pos !== false) 
             {
                 //found an mp3
-                $filePath = $mediaFolder.'/'.$value;
+                $filePath = __DIR__.'/'.$mediaFolder.'/'.$value;
                 
                 //get the date modified
                 $fileModifiedDate = date("YmdHis",filemtime($filePath));  
