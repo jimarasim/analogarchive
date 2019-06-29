@@ -66,6 +66,24 @@ class AnalogArchive {
        return $songs;     
     }
     
+    /**
+     * Used by seattlerules.com
+     * @param type $mediaFolder
+     */
+    public static function GetSongsJson($mediaFolder='live')
+    {
+        //set this since the mediaFolder GET parameter won't be set
+        self::$mediaFolder = $mediaFolder;
+        
+        $songs = self::GetSongs();
+        
+        return json_encode($songs);
+    }
+    
+    /**
+     * Legacy for analogarchive.com only
+     * @return type
+     */
     public static function CatalogMedia()
     {
         $songs = self::GetSongs();
