@@ -27,7 +27,7 @@ class AnalogArchive {
      * Used by seattlerules.com
      * @param type $mediaFolder
      */
-    public static function GetSongs($mediaFolder='live')
+    public static function GetSongData($mediaFolder='live')
     {
         // Initialize getID3 engine
         $getID3 = new getID3;
