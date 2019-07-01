@@ -56,6 +56,24 @@ class AnalogArchive {
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
             }
        }
+       
+       //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
+       //http://www.php.net//manual/en/function.array-multisort.php
+       // Obtain a list of columns
+       //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
+        foreach ($songs as $key => $row) {
+            $file[$key]  = $row['file'];
+            $artistUnique[$key] = $row['artist']; //this is for the dropdown, keep The in
+            //use regular expression to take the The from the beginning of the string THIS REMOVES "THE" FROM DROP DOWN FILTER AS WELL :(
+            $artist[$key] = preg_replace('/^The /', '', $row['artist']);
+            $album[$key]  = $row['album'];
+            $title[$key] = $row['title'];   
+            $track[$key] = $row['track'];
+            $modifiedDate[$key] = $row['modifiedDate'];
+        }
+
+        // Sort the data 
+        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
         
         
        return $songs;
