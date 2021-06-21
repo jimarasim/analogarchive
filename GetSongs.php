@@ -40,7 +40,7 @@ foreach ($files as $value) {
 }
 //build a json string of $songs array data and return it
 $jsonResponse=json_encode($songs);
-
+header('Access-Control-Allow-Origin: *');
 echo($jsonResponse);
 
 function GetId3DisplayId3Data($getID3,$filePath,$fileDate,&$songs)
