@@ -22,7 +22,67 @@ class AnalogArchive {
     private static $artistFilter='';
     private static $mediaFolder = 'live';
     private static $emptyVal='';
+
+    /**
+     * Used by seattlerules.com
+     * @param type $mediaFolder
+     */
+    public static function GetSongData($mediaFolder='live')
+    {
+        // Initialize getID3 engine
+        $getID3 = new getID3;
+        
+        if(!file_exists(__DIR__.'/'.$mediaFolder)) {
+            echo('CANNOT FIND '.__DIR__.'/'.$mediaFolder);
+            return;
+        }
+        
+        //get a list of files in media folder
+        $files = scandir(__DIR__.'/'.$mediaFolder);
+        
+        $songs = array();
+        
+        //iterate through files
+        foreach ($files as $value) {
+            //find the mp3s
+            $pos = strrpos($value, ".mp3",-1);
+            if ($pos !== false) 
+            {
+                //found an mp3
+                $filePath = __DIR__.'/'.$mediaFolder.'/'.$value;
+                
+                //get the date modified
+                $fileModifiedDate = date("YmdHis",filemtime($filePath));  
+                self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
+            }
+       }
+       
+       //sort songs by artist a.artist+a.album+a.track+a.title+a.file+a.date
+       //http://www.php.net//manual/en/function.array-multisort.php
+       // Obtain a list of columns
+       //"file"=>$filePath,"artist"=>$artist,"album"=>$album,"title"=>$title,"track"=>$track
+        foreach ($songs as $key => $row) {
+            $file[$key]  = $row['file'];
+            $artistUnique[$key] = $row['artist']; //this is for the dropdown, keep The in
+            //use regular expression to take the The from the beginning of the string THIS REMOVES "THE" FROM DROP DOWN FILTER AS WELL :(
+            $artist[$key] = preg_replace('/^The /', '', $row['artist']);
+            $album[$key]  = $row['album'];
+            $title[$key] = $row['title'];   
+            $track[$key] = $row['track'];
+            $modifiedDate[$key] = $row['modifiedDate'];
+        }
+
+        // Sort the data 
+        array_multisort($artist, SORT_ASC, $album, SORT_ASC, $track, SORT_ASC, $title, SORT_ASC, $file, SORT_ASC, $songs);
+        
+        
+       return $songs;
+    }
     
+    /**
+     * Legacy for analogarchive.com only
+     * @return type
+     */
     public static function CatalogMedia()
     {
         // Initialize getID3 engine
@@ -58,22 +118,11 @@ class AnalogArchive {
                 $filePath = self::$mediaFolder.'/'.$value;
                 
                 //get the date modified
-                $fileModifiedDate = date("YmdHis",filemtime($filePath));
-                
-                //DEBUG
-//                $startTime = date('YmdHisu');
-               
+                $fileModifiedDate = date("YmdHis",filemtime($filePath));  
                 self::GetId3DisplayId3Data($getID3,$filePath,$fileModifiedDate,$songs);
-                
-                //DEBUG
-//                $elapsedTime = date('YmdHisu')-$startTime;
-//                if($elapsedTime>0.5){
-//                    echo('FILE:'.$filePath.' TIME:'.$elapsedTime.'<br />');
-//                }
             }
-            
        }
-       
+
        //TODO CHECK IF SONGS ARRAY IS EMPTY BEFORE GOING FURTHER
        if(sizeof($songs)<=0){
            echo("<h2 class='error'>THERE ARE NO MP3 FILES IN mediaFolder SPECIFIED:".self::$mediaFolder."</h2>");
