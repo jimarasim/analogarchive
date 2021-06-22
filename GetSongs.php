@@ -43,7 +43,7 @@ foreach ($files as $value) {
 }
 //build a json string of $songs array data and return it
 // Sort the data
-array_multisort($artist, SORT_ASC, $album, SORT_ASC, $title, SORT_ASC, $track, SORT_ASC, $songs);
+array_multisort($artist, SORT_ASC, $album, SORT_ASC, $title, SORT_ASC, $track, SORT_ASC, $file, SORT_ASC, $modifiedDate, SORT_ASC, $songs);
 $jsonResponse=json_encode($songs);
 echo($jsonResponse);
 
