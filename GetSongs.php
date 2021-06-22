@@ -2,6 +2,7 @@
 require_once('getid3/getid3.php');
 
 header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 
 //see if the mediaFolder was specified
 $mediaFolderGetParm=filter_input(INPUT_GET,('mediaFolder'));
