@@ -42,7 +42,6 @@ foreach ($files as $value) {
     }
 }
 //build a json string of $songs array data and return it
-// Sort the data
 $jsonResponse=json_encode($songs);
 echo($jsonResponse);
 
