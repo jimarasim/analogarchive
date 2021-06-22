@@ -10,6 +10,7 @@ var allArtistsEnum='-ALL ARTISTS-';
 document.addEventListener('DOMContentLoaded', function () {
 
     SetupEvents();
+    SetupEvents2();
 
 });
 
@@ -292,6 +293,17 @@ var analogSongs = new Array();
 var liveSongs = new Array();
 var songsArray = new Array();
 
+function SetupEvents2() {
+        //AUDIO PLAYER SONG ENDED
+    $('#analogplayer2').bind("ended", function(){
+        var currentIndex = document.getElementById("songs").selectedIndex;
+        var nextIndex = ((++currentIndex) === (document.getElementById("songs").length))?0:currentIndex;
+        document.getElementById("songs").selectedIndex = nextIndex;
+        
+        playSong(document.getElementById("songs").value);
+    });
+}
+
 function getSongs(mediaFolder) {
     
     removeSongs();
@@ -366,7 +378,20 @@ function populateSongsDropdown(songs) {
         document.getElementById("songs").appendChild(song);
     }
     
-    playSong(songs[0].file);
+    //sort songs
+    $(function() {
+        // choose target dropdown
+        var select = $('#songs');
+        select.html(select.find('option').sort(function(x, y) {
+          // to change to descending order switch "<" for ">"
+          return $(x).text() > $(y).text() ? 1 : -1;
+        }));
+
+        // select default item after sorting (first item)
+        $('#songs').get(0).selectedIndex = 0;
+        playSong(document.getElementById('songs').value);
+      });
+    
 }
 
 function isJson(str) {
@@ -378,8 +403,9 @@ function isJson(str) {
     return true;
 }
 
-function playSong(fileName) {
-    document.getElementById("analogplayer").src = fileName;
-    document.getElementById("analogplayer").load();
-    document.getElementById("analogplayer").play();
+function playSong(song) {
+    document.getElementById("analogplayer2").src = song;
+    //document.getElementById("analogplayer2").load();
+    document.getElementById("analogplayer2").play();
 }
+
