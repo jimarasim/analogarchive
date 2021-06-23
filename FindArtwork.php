@@ -4,6 +4,8 @@ include 'AnalogArchive.php';
  * This is the server side script for an ajax call that tries to get an album's art cover
  * 
  */
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: image/jpeg');
 
 try
 {
