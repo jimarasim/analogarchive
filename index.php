@@ -38,9 +38,14 @@ include 'AnalogArchive.php';
             </td>
             <td>
                 <ul>
+                    <li>This site is dedicated to rare recordings; to preserve those that cannot easily be found elsewhere (e.g. spotify, youtube, et al)</li>
                     <li>This site will never have advertising nor anything for sale.</li>
-                    <li>Vinyl mp3s ripped at 192kbps.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s</li>
-                    <li>Buy these lps at your local record store if you like them, or start your own record label. I own everything you see here on wax, or recorded the WAV files myself.</li>                        
+                    <li>If any monetization came out of analogarchive.com, all would go to the appropriate artist.</li>
+                    <li>I work on this site as a coping mechanism for things that could trigger mental illness: death, heartache, depression, anger, helplessnes, sorrow, ideation, too-much-happiness etc..</li>
+                    <li>I pay for hosting in the cloud. It gets more expensive the more its used, but right now like 50 a month depending on how much I use it.</li>
+                    <li>Vinyl mp3s ripped at 192kbps, I think. Google it, lol.  Live recordings PCM 48 kHz/24bit converted to 192kbps mp3s, or something.</li>
+                    <li>ANALOG: Buy these <b>analog</b> lps at your local, collector-grade record store if you like them, or go to discogs.com and find what you need.</li>
+                    <li>LIVE: I taped all of the <b>live</b> recordings. If an artist were to contact me, I will happily hand over original wav files, if I still have them. A lot gets lost in the move, which is my reason for putting them here.</li>
                     </li>
                 </ul>
             </td>
